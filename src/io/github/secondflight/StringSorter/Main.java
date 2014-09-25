@@ -1,11 +1,15 @@
 package io.github.secondflight.StringSorter;
 
+import io.github.secondflight.util.Counter;
+
 import java.util.List;
 
 public class Main {
 
 	public static void main(String[] args) {
-		List<String> unsorted = RandomStringGenerator.randomStringList(20);
+		Counter c = new Counter ();
+		
+		List<String> unsorted = RandomStringGenerator.randomStringList(100);
 		
 		System.out.println();
 		System.out.println("Unsorted:");
@@ -19,10 +23,14 @@ public class Main {
 		System.out.println("Sorted:");
 		System.out.println();
 		
-		List<String> processed = SimpleSorter.simpleSorter(unsorted);
+		List<String> processed = SimpleSorter.simpleSorter(unsorted, c);
 		for (String s : processed) {
 			System.out.println(s);
 		}
+		
+		System.out.println();
+		System.out.println("Iterations:");
+		System.out.println(c.getValue());
 
 	}
 

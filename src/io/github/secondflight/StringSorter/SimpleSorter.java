@@ -1,19 +1,20 @@
 package io.github.secondflight.StringSorter;
 
 import io.github.secondflight.util.Alphabet;
+import io.github.secondflight.util.Counter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SimpleSorter {
-	public static List<String> simpleSorter (List<String> stringList) {
+	public static List<String> simpleSorter (List<String> stringList, Counter c) {
 		
 		List<String> list = new ArrayList<String>(stringList);
 		
 		boolean loopIsDone = false;
 		int iterations = 0;
-		while (!loopIsDone && iterations < 200) {
+		while (!loopIsDone && iterations < 1000) {
 			loopIsDone = true;
 			for (int i = 0; i < list.size() - 1; i++) {
 				if (Alphabet.lettersToNumbers(list.get(i).substring(0, 1)) < (Alphabet.lettersToNumbers(list.get(i + 1).substring(0, 1)))) {
@@ -21,6 +22,7 @@ public class SimpleSorter {
 					loopIsDone = false;
 				}
 			}
+			c.add();
 			if (loopIsDone) {
 				break;
 			}
