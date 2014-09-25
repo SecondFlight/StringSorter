@@ -8,16 +8,8 @@ import java.util.List;
 
 public class SimpleSorter {
 	public static List<String> simpleSorter (List<String> stringList) {
-		List<String> characters = new ArrayList<String>();
-		
-		String charactersString = "abcdefghijklmnopqrstuvwxyz";
-		
-		for (int i = 0; i < 26; i++) {
-			characters.add(Character.toString(charactersString.charAt(i)));
-		}
 		
 		List<String> list = new ArrayList<String>(stringList);
-		
 		
 		boolean loopIsDone = false;
 		int iterations = 0;
