@@ -14,21 +14,46 @@ public class SimpleSorter {
 		
 		boolean loopIsDone = false;
 		int iterations = 0;
-		while (!loopIsDone && iterations < 1000) {
-			loopIsDone = true;
-			for (int i = 0; i < list.size() - 1; i++) {
-				if (Alphabet.lettersToNumbers(list.get(i).substring(0, 1)) < (Alphabet.lettersToNumbers(list.get(i + 1).substring(0, 1)))) {
-					Collections.swap(list, i, i+1);
-					loopIsDone = false;
-				}
+		
+		int maxLength = 0;
+		for (String item : list) {
+			if (maxLength < item.length()) {
+				maxLength = item.length();
 			}
-			c.add();
-			if (loopIsDone) {
-				break;
-			}
-			iterations ++;
 		}
 		
+		for (int character = 0; character < maxLength; character++) {
+			while (iterations < 10000) {
+				loopIsDone = true;
+				for (int i = 0; i < list.size() - 1; i++) {
+					int letterOne;
+					if (list.get(i).length() > character) {
+						letterOne = Alphabet.lettersToNumbers(list.get(i).substring(character, character + 1));
+
+					} else {
+						letterOne = 0;
+					}
+					
+					int letterTwo;
+					if (list.get(i + 1).length() > character) {
+						letterTwo = Alphabet.lettersToNumbers(list.get(i + 1).substring(character, character + 1));
+					} else {
+						letterTwo = 0;
+					}
+					
+					if (letterOne > letterTwo) {
+						Collections.swap(list, i, i+1);
+						loopIsDone = false;
+						c.add();
+					}
+				}
+			
+				if (loopIsDone) {
+					break;
+				}
+				iterations ++;
+			}
+		}
 		return list;
 	}
 	
