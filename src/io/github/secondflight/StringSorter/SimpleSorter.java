@@ -22,7 +22,7 @@ public class SimpleSorter {
 			}
 		}
 		
-		while (iterations < 100) {
+		while (iterations < 1000) {
 			loopIsDone = false;
 			
 			List<String> compareList = new ArrayList<String>(list);

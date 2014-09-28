@@ -1,10 +1,13 @@
 package io.github.secondflight.StringSorter;
 
 import io.github.secondflight.util.Counter;
+import io.github.secondflight.util.Words;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Main {
@@ -13,10 +16,7 @@ public class Main {
 		Counter c = new Counter ();
 		
 		List<String> unsorted = RandomStringGenerator.randomStringList(100);
-		
-		System.out.println();
-		System.out.println("Unsorted:");
-		System.out.println();
+		//List<String> unsorted = Words.getList();
 		
 		/* isDone = false;
 		
@@ -37,19 +37,30 @@ public class Main {
         		isDone = true;
         	}
 		}*/
+		
+		/*
+		System.out.println();
+		System.out.println("Unsorted:");
+		System.out.println();
 	
 		for (String s : unsorted) {
 			System.out.println(s);
 		}
+		*/
 		
 		System.out.println();
 		System.out.println("Sorted:");
 		System.out.println();
 		
-		List<String> processed = SimpleSorter.simpleSorter(unsorted, c);
+		List<String> processed = GroupByLetter.groupByLetter(unsorted, c);
+		
+		processed = SimpleSorter.simpleSorter(processed, c);
+		
 		for (String s : processed) {
 			System.out.println(s);
 		}
+		
+		
 		
 		System.out.println();
 		System.out.println("Iterations:");
