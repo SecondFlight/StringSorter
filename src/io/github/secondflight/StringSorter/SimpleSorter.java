@@ -22,40 +22,68 @@ public class SimpleSorter {
 			}
 		}
 		
-		for (int character = 0; character < maxLength; character++) {
-			while (iterations < 10000) {
-				loopIsDone = true;
-				for (int i = 0; i < list.size() - 1; i++) {
-					int letterOne;
-					if (list.get(i).length() > character) {
-						letterOne = Alphabet.lettersToNumbers(list.get(i).substring(character, character + 1));
-
-					} else {
-						letterOne = 0;
-					}
-					
-					int letterTwo;
-					if (list.get(i + 1).length() > character) {
-						letterTwo = Alphabet.lettersToNumbers(list.get(i + 1).substring(character, character + 1));
-					} else {
-						letterTwo = 0;
-					}
-					
-					if (letterOne > letterTwo) {
-						Collections.swap(list, i, i+1);
-						loopIsDone = false;
-						c.add();
-					}
-				}
+		while (iterations < 100) {
+			loopIsDone = false;
 			
-				if (loopIsDone) {
-					break;
-				}
-				iterations ++;
+			List<String> compareList = new ArrayList<String>(list);
+			
+			singleIteration (list, c);
+			
+			if (list.equals(compareList)) {
+				loopIsDone = true;
 			}
+			
+			if (loopIsDone) {
+				break;
+			}
+			iterations ++;
 		}
 		return list;
-	}
+	}	
 	
+	public static List<String> singleIteration (List<String> list, Counter c) {
+		List<String> stringList = new ArrayList<String>(list);
+		
+		for (String s : list) {
+			if (list.indexOf(s) + 1 <= list.size() - 1) {
+				String itemOne = s;
+				String itemTwo = list.get(list.indexOf(s) + 1);
+				int maxLength;
+				if (itemOne.length() > itemTwo.length()) {
+					maxLength = itemOne.length();
+				} else {
+					maxLength = itemTwo.length();
+				}
+				
+				for (int i = 0; i < maxLength - 1; i++) {
+					int numberOne;
+					int numberTwo;
+					
+					if (i + 1 <= itemOne.length()) {
+						numberOne = Alphabet.lettersToNumbers(itemOne.substring(i, i + 1));
+					} else {
+						numberOne = 0;
+					}
+					
+					if (i + 1 <= itemTwo.length()) {
+						numberTwo = Alphabet.lettersToNumbers(itemTwo.substring(i, i + 1));
+					} else {
+						numberTwo = 0;
+					}
+					
+					if (numberOne > numberTwo) {
+						Collections.swap(list, list.indexOf(s), list.indexOf(s) + 1);
+						c.add();
+						break;
+					} else if (numberOne < numberTwo) {
+						break;
+					}
+				}
+			}
+		}
+		
+		return stringList;
+	}
+		
 	
 }
